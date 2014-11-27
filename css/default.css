@@ -1,0 +1,46 @@
+/* 
+    Created on : 27.11.2014, 21:00:09
+    Author     : CJ.Prasatko
+*/
+.accordion-toggle {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: 1px solid grey;
+    display: block;
+    color: black;
+}
+.accordion-toggle:hover {
+    background-color: #e3e3e3;
+    color: black;
+    text-decoration: none;
+}
+.accordion-toggle:focus {
+    background-color: #e3e3e3;
+    color: black;
+    text-decoration: none;
+    outline: none;
+}
+.accordion {
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+#prvniPolozkaMenu {
+    border-top: none;
+    border-radius: 5px 5px 0 0;
+}
+#posledniPolozkaMenu {
+    border-radius: 0 0 5px 5px;
+}
+.glyphicon-chevron-down {
+    float: right;
+}
+.menu-seznam-ul {
+    margin-top: 6px;
+}
+#obsah {
+    text-align: justify;
+}
+
