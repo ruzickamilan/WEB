@@ -33,6 +33,7 @@ class Smerovac extends Kontroler {
         } 
         else {
             $this->presmeruj("?page=error");
+        
         }
     }
 

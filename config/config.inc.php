@@ -33,6 +33,10 @@ define('DB_DATABASE_NAME', 'db1');
 define('DB_USER_LOGIN', 'root');
 define('DB_USER_PASSWORD', 'root');
 
+// DEFINICE TABULEK
+define('TABLE_PREFIX', '');
+define('UZIVATEL', TABLE_PREFIX.'uzivatel');
+
 // NACTE TWIG
 require_once 'application/packages/twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
@@ -43,7 +47,7 @@ require 'config/functions.inc.php';
 
 // NACTE TRIDY
 spl_autoload_register(function($trida) {
-    if (preg_match('#Db$#', $trida)) {
+    if (preg_match('#Db#', $trida)) {
         require_once(MODELY . $trida . ".class.php");
     } 
     else {

@@ -1,0 +1,11 @@
+/* 
+    Created on : 30.11.2014, 19:39:40
+    Author     : CJ.Prasatko
+*/
+@font-face {
+    font-family: fontlogo;
+    src: url("../application/packages/mistral.eot");
+}
+.logo {
+    font-family: fontlogo;
+}

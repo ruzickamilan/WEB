@@ -1,11 +1,11 @@
 <?php
 
-class ErrorKontroler extends Kontroler{
+class KontaktKontroler extends Kontroler{
     public function zpracuj($URL) {
-        $this->title = "Stránka nenalezena";
+        $this->title = "Kontakt";
         
         if (!Session::isPrihlasen()) {
-            $this->prihlaseni = getTlacitko();
+           $this->prihlaseni = getTlacitko();
         }
         else {
             $this->prihlaseni = getUzivatel(Session::getEmail());

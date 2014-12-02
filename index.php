@@ -5,10 +5,6 @@
     // START APLIKACE
     $app = App::getInstance();
     
-    // PRIPOJENI K DB
-    $app->getConnectionDb();
-    $app->connectDb();
-    
     // SMEROVAC A KONTROLER
     $smerovac = $app->getSmerovac();
     $smerovac->zpracuj($_REQUEST["page"]);
@@ -24,7 +20,8 @@
     // NACTE HLAVNI SABLONU
     $template_params = array();
     $template_params['title'] = "Quatrofin - " . $kontroler->getTitle();
-    //$template_params['prihlaseni'] = $kontroler->getStavPrihlaseni();
+    $template_params['prihlaseni'] = $kontroler->getPrihlaseni();
+    $template_params['info'] = $kontroler->getInfo();
     $template_params['obsah'] = $pohled;
   
     echo $template->render($template_params);

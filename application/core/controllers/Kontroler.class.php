@@ -4,6 +4,7 @@ abstract class Kontroler {
 
     protected $title;
     protected $prihlaseni;
+    protected $info;
 
     protected function getSablona($URL) {
         $cestaSablony = POHLEDY;
@@ -22,8 +23,12 @@ abstract class Kontroler {
         return $this->title;
     }
     
-    public function getStavPrihlaseni() {
+    public function getPrihlaseni() {
         return $this->prihlaseni;
+    }
+    
+    public function getInfo() {
+        return $this->info;
     }
 
     public function getPohled($URL) {

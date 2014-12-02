@@ -34,12 +34,12 @@ class Db {
      * @param string $table_name - jméno tabulky
      * @param string $select_columns_string - jména sloupců oddělené čárkami, nebo jiné příkazy SQL
      * @param array $where_array - seznam podmínek<br/>
-     * 							[] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
+     * [] - column = sloupec; value - int nebo string nebo value_mysql = now(); symbol
      * @param string $limit_string - doplnit limit string
      */
     public function DBSelectOne($table_name, $select_columns_string, $where_array, $limit_string = "") {
         // PDO - MySQL
-        //printr($where_array);
+        // printr($where_array);
         // vznik chyby v PDO
         $mysql_pdo_error = false;
 
