@@ -11,6 +11,7 @@ ini_set("display_errors", 1);
 define('KONTROLERY', 'application/core/controllers/');
 define('MODELY', 'application/core/models/');
 define('POHLEDY', 'application/core/views/pages/');
+define('SABLONA', 'application/core/views/');
 
 // URL PROJEKTU
 /*
@@ -36,6 +37,8 @@ define('DB_USER_PASSWORD', 'root');
 // DEFINICE TABULEK
 define('TABLE_PREFIX', '');
 define('UZIVATEL', TABLE_PREFIX.'uzivatel');
+define('DISKUZE', TABLE_PREFIX.'diskuze');
+define('ODPOVED', TABLE_PREFIX.'odpoved');
 
 // NACTE TWIG
 require_once 'application/packages/twig/lib/Twig/Autoloader.php';
@@ -43,7 +46,6 @@ Twig_Autoloader::register();
 
 // NACTE FUNKCE
 require 'config/functions.inc.php';
-
 
 // NACTE TRIDY
 spl_autoload_register(function($trida) {

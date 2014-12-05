@@ -13,12 +13,12 @@
     $pohled = $kontroler->zpracuj($smerovac->getCesta());
     
     // SABLONA
-    $loader = new Twig_Loader_Filesystem('application/core/views/');
+    $loader = new Twig_Loader_Filesystem(SABLONA);
     $twig = new Twig_Environment($loader);
     $template = $twig->loadTemplate('sablona.php');
 
     // NACTE HLAVNI SABLONU
-    $template_params = array();
+    $template_params = $kontroler->getPole();
     $template_params['title'] = "Quatrofin - " . $kontroler->getTitle();
     $template_params['prihlaseni'] = $kontroler->getPrihlaseni();
     $template_params['info'] = $kontroler->getInfo();

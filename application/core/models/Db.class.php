@@ -3,7 +3,8 @@
 class Db {
 
     private $connection = null;
-    
+    private $mysql_pdo_error = true;
+
     public function GetConnection() {
         return $this->connection;
     }
@@ -149,14 +150,12 @@ class Db {
                 $symbol = $item["symbol"];
 
                 if (key_exists("value", $item))
-                    $value_pom = "?";       // budu to navazovat
+                    $value_pom = "";       // budu to navazovat
                 else if (key_exists("value_mysql", $item))
                     $value_pom = $item["value_mysql"];   // je to systemove, vlozit rovnou - POZOR na SQL injection, tady to muze projit
-
-
-                    
-//echo "`$column` $symbol  $value_pom ";
-                $where_pom .= "`$column` $symbol  $value_pom ";
+    
+                //echo "`$column` $symbol  $value_pom ";
+                $where_pom .= "$column $symbol $value_pom";
             }
 
         // doplnit slovo where
@@ -185,7 +184,7 @@ class Db {
 
 
         // 1) pripravit dotaz s dotaznikama
-        $query = "select $select_columns_string from `" . $table_name . "` $where_pom $order_by_pom $limit_string;";
+        $query = "select $select_columns_string from " . $table_name . " $where_pom $order_by_pom $limit_string;";
         // echo $query;
         // 2) pripravit si statement
         $statement = $this->connection->prepare($query);
@@ -219,6 +218,7 @@ class Db {
         // 6) nacist data a vratit
         if ($mysql_pdo_error == false) {
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+            //echo $query;
             return $rows;
         } else {
             echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
@@ -259,6 +259,10 @@ class Db {
         // echo "QUERY = ".$query;
         // 2) pripravit si statement
         $statement = $this->connection->prepare($query);
+        if (!$statement) {
+            echo "\nPDO::errorInfo():\n";
+            print_r($this->connection->errorInfo());
+}
 
         // 3) NAVAZAT HODNOTY k otaznikum dle poradi od 1
         $bind_param_number = 1;
@@ -278,17 +282,16 @@ class Db {
 
         if ($errors[0] + 0 > 0) {
             // nalezena chyba
-            $mysql_pdo_error = true;
+            $this->mysql_pdo_error = false;
         }
-
-        // 6) nacist ID vlozeneho zaznamu a vratit
-        if ($mysql_pdo_error == false) {
-            $item_id = $this->connection->lastInsertId();
-            return $item_id;
+        
+        // 6) vratit chybu nebo OK
+        if ($this->mysql_pdo_error == true) {
+            return true;
         } else {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            //printr($errors);
+            //echo "SQL dotaz: $query";
+            return false;
         }
     }
 
@@ -353,25 +356,37 @@ class Db {
 
         if ($errors[0] + 0 > 0) {
             // nalezena chyba
+            $this->mysql_pdo_error = false;
+        }
+
+        // 6) vratit chybu nebo OK
+        if ($this->mysql_pdo_error == true) {
+            return true;
+        } else {
+            printr($errors);
+            echo "SQL dotaz: $query";
+            return false;
+        }
+    }
+    
+    public function DBUpdate($query) {
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute();
+        
+        $errors = $statement->errorInfo();
+        
+        $mysql_pdo_error = false;
+        if ($errors[0] + 0 > 0) {
             $mysql_pdo_error = true;
         }
 
-        // 6) nacist ID vlozeneho zaznamu a vratit
         if ($mysql_pdo_error == false) {
-            $item_id = $this->connection->lastInsertId();
-            return $item_id;
-        } else {
-            echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
-            echo "SQL dotaz: $query";
+            return $statement->rowCount();
         }
-    }
-
-    /**
-     * TODO tohle uz musite zvladnout sami.
-     */
-    public function DBUpdate() {
-        
+        else {
+            return 0;
+        }
     }
 
     // KONEC UNIVERZALNI METODY

@@ -10,7 +10,7 @@ class DbLogin extends Db {
     }
     
     public function najdiUzivatele($email, $heslo) {
-        $columns = "jmeno, email, telefon, typ_uctu, autorizace, ban";
+        $columns = "id, jmeno, email, telefon, typ_uctu, autorizace, ban";
         $where = array(
                     array(
                         'column' => "email",
@@ -28,10 +28,8 @@ class DbLogin extends Db {
         if ($row) {
             if ($row['ban'] == 0) {
                 Session::login();
-                Session::pamatujUzivatele($row['jmeno'], $row['email'], $row['telefon'], $row['typ_uctu'], $row['autorizace']);
-                return "<div class='alert alert-success' role='alert'>Přihlášení proběhlo v pořádku! Pokud neproběhne přesměrování <a href='?page=muj_ucet'>klikněte sem</a>.</div>
-                        <script type = 'text/javascript'>setTimeout(\"location.href='?page=muj_ucet';\", 1500);</script>    
-                       ";
+                Session::pamatujUzivatele($row['id'], $row['jmeno'], $row['email'], $row['telefon'], $row['typ_uctu'], $row['autorizace']);
+                return "OK";
             }
             else {
                 return '<div class="alert alert-danger" role="alert">Tento účet byl zablokován z důvodu nevhodného chování na serveru!</div>';

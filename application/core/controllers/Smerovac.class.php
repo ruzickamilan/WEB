@@ -33,12 +33,15 @@ class Smerovac extends Kontroler {
         } 
         else {
             $this->presmeruj("?page=error");
-        
         }
     }
 
     private function getKontrolerJmeno($text) {
-        $jmeno = ucwords($text);
+        $pole = explode("_", $text);
+        $jmeno = "";
+        foreach ($pole as $value) {
+            $jmeno .= ucwords($value);
+        }
         return $jmeno;
     }
 

@@ -10,7 +10,8 @@
 .menu li {
     list-style: none; 
     margin-left: -40px;
-    border-top: 1px solid black;
+    border-top: 1px solid lightgray;
+    background-color: rgb(246, 246, 246);
     font-size: 17px;
 }
 .menu a {
@@ -63,6 +64,10 @@
 }
 .plus-minus {
     margin-top: 3px;
+}
+.arrow,
+.plus-minus {
+    color: rgb(50, 50, 50);
 }
 //Konec nastaveni menu
 
@@ -133,5 +138,29 @@ a:active {
 #menuUzivatele a {
     height: 40px;
     padding-top: 10px;
+}
+.table {
+    max-width: 400px;
+}
+.text-diskuze {
+    width: 100%;
+}
+.diskuze {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+.diskuze thead tr td {
+    background-color: lightgray;
+    padding: 10px;
+    font-size: 16px;
+}
+.diskuze tbody tr td {
+    padding: 10px;
+    border: 1px solid lightgray;
+    text-align: justify;
+}
+.diskuze tbody tr td p {
+    margin-left: 30px;
+    margin-bottom: 0px;
 }
 

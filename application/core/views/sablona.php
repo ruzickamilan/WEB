@@ -14,6 +14,7 @@
         <link href="application/packages/bootstrap/css/modern-business.css" rel="stylesheet">
         <link href="application/packages/bootstrap/css/metismenu.min.css" rel="stylesheet">
         <link href="application/packages/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+        <link href="application/packages/simptip/simptip.css" rel="stylesheet">
         <link href="css/default.css" rel="stylesheet">
 
         <!--[if lt IE 9]>
@@ -79,19 +80,19 @@
                 <div class="item active">
                     <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
                     <div class="carousel-caption">
-                        <h2>Nadpis 1</h2>
+                        <!-- Popisek 1 -->
                     </div>
                 </div>
                 <div class="item">
                     <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
                     <div class="carousel-caption">
-                        <h2>Nadpis 2</h2>
+                        <!-- Popisek 2 -->
                     </div>
                 </div>
                 <div class="item">
                     <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
                     <div class="carousel-caption">
-                        <h2>Nadpis 3</h2>
+                        <!-- Popisek 3 -->
                     </div>
                 </div>
             </div>
@@ -103,8 +104,8 @@
                 <div class="col-md-3" style="margin-top: 45px;">
 
                     <!-- Zacatek menu -->
-                    <ul style = "border: 1px solid black;" id="postranniMenu" class="menu">
-                        <li style="border-top: none;">
+                    <ul style = "border: 2px solid lightgray; border-radius: 5px;" id="postranniMenu" class="menu">
+                        <li style="border-top: none; border-radius: 3px 3px 0 0;">
                             <a href="#">Finanční služby <span class="glyphicon arrow"></span></a>
                             <ul>
                                 <li><a href="?page=pro_obcany">Pro občany</a></li>
@@ -152,7 +153,7 @@
                         <li>
                             <a href="?page=administrativni_sluzby">Administrativní služby</a>
                         </li>
-                        <li>
+                        <li style="border-radius: 0 0 3px 3px;">
                             <a href="?page=pravni_servis" id="posledniPolozkaMenu">Právní servis</a>
                         </li>
                     </ul>
@@ -186,11 +187,16 @@
         <script src="application/packages/bootstrap/js/jquery.min.js"></script>
         <script src="application/packages/bootstrap/js/bootstrap.min.js"></script>
         <script src="application/packages/bootstrap/js/metismenu.min.js"></script>
+        <script>
+            $('html, body').animate({
+                scrollTop: $('#reakce').offset().top
+            }, 1000);
+        </script>
 
         <!-- Script to Activate the Carousel and menu -->
         <script>
             $('.carousel').carousel({
-                interval: 5000 //changes the speed
+                interval: 5000
             });
             $(function () {
                 $('#postranniMenu').metisMenu();

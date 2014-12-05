@@ -5,15 +5,20 @@ class LoginKontroler extends Kontroler{
         $this->title = "Přihlášení";
         
         if (isset($_POST['email']) && isset($_POST['heslo'])) {
-            $email = $_POST['email'];
+            $email = strtolower($_POST['email']);
             $heslo = md5(sha1($_POST['heslo']));
             $prihlaseni = new DbLogin();
             $vysledek = $prihlaseni->najdiUzivatele($email, $heslo);
-            $this->info = $vysledek;
+            if ($vysledek != "OK") {
+                $this->info = $vysledek;
+            }
+            else {
+                echo "<script type = 'text/javascript'>setTimeout(\"location.href='?page=muj_ucet&logged';\", 0);</script>";
+            }
         }
         
         if (Session::isPrihlasen()) {
-            $this->prihlaseni = getUzivatel(Session::getEmail());
+            $this->prihlaseni = getUzivatelskeMenu(Session::getEmail());
         }
         else {
             $this->prihlaseni = getTlacitko();

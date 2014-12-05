@@ -8,7 +8,7 @@ class KontaktKontroler extends Kontroler{
            $this->prihlaseni = getTlacitko();
         }
         else {
-            $this->prihlaseni = getUzivatel(Session::getEmail());
+            $this->prihlaseni = getUzivatelskeMenu(Session::getEmail());
         }
         
         return parent::zpracuj($URL);

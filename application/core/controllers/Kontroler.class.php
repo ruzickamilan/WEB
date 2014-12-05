@@ -5,6 +5,7 @@ abstract class Kontroler {
     protected $title;
     protected $prihlaseni;
     protected $info;
+    protected $params;
 
     protected function getSablona($URL) {
         $cestaSablony = POHLEDY;
@@ -29,6 +30,10 @@ abstract class Kontroler {
     
     public function getInfo() {
         return $this->info;
+    }
+    
+    public function getPole() {
+        return $this->params = Array();
     }
 
     public function getPohled($URL) {
