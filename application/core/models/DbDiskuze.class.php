@@ -56,7 +56,7 @@ class DbDiskuze extends Db {
     }
     
     public function vypisOdpovedi() {
-        $columns = "jmeno, DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cely_cas', DATE_FORMAT(cas, '(%H:%i)') AS 'cas', text, diskuze_id, uzivatel_id";
+        $columns = "jmeno, cas AS 'presny_cas', DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cely_cas', DATE_FORMAT(cas, '(%H:%i)') AS 'cas', text, diskuze_id, uzivatel_id";
         $where = array(
                     array(
                         'column' => "t1.id = t2.uzivatel_id order by t2.cas",
@@ -74,6 +74,30 @@ class DbDiskuze extends Db {
         }
     }
     
+    public function smazDotaz($id) {
+        $query1 = "DELETE FROM " . ODPOVED . " WHERE diskuze_id = '".$id."';";
+        $query2 = "DELETE FROM " . DISKUZE . " WHERE id = '".$id."';";
+        
+        $result1 = $this->db->DBDelete($query1);
+        $result2 = $this->db->DBDelete($query2);
+        if ($result1 >= 0 && $result2 == 1) {
+            return '<div class="alert alert-success" role="alert">Dotaz byl úspěšně odebrán!</div>';
+        } else {
+            return '<div class="alert alert-danger" role="alert">Někde nastala chyba!</div>';
+        }
+    }
+
+    public function smazOdpoved($cas) {
+        $query = "DELETE FROM " . ODPOVED . " WHERE cas = '".$cas."';";
+        
+        $result = $this->db->DBDelete($query);
+        if ($result == 1) {
+            return '<div class="alert alert-success" role="alert">Odpověd byla úspěšně odebrána!</div>';
+        } else {
+            return '<div class="alert alert-danger" role="alert">Někde nastala chyba!</div>';
+        }
+    }
+
     public function odpojDB() {
         $this->db->Disconnect();
     }

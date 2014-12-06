@@ -1,4 +1,4 @@
-<h2 class="page-header">Stránka nenalezena</h2>
+<h1 class="page-header">Stránka nenalezena</h1>
 <p>Požadovaná stránka nebyla nalezena. Může se jednat o špatný odkaz nebo o dokument, který již byl ze serveru odstraněn.</p>
 <ul>
   <li>zkonrolujte prosím požadované URL</li>

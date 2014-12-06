@@ -187,6 +187,7 @@
         <script src="application/packages/bootstrap/js/jquery.min.js"></script>
         <script src="application/packages/bootstrap/js/bootstrap.min.js"></script>
         <script src="application/packages/bootstrap/js/metismenu.min.js"></script>
+        <!-- Animace přechodu k dané reakci -->
         <script>
             $('html, body').animate({
                 scrollTop: $('#reakce').offset().top
@@ -198,9 +199,12 @@
             $('.carousel').carousel({
                 interval: 5000
             });
-            $(function () {
+            $(document).ready(function () {
                 $('#postranniMenu').metisMenu();
             });
         </script>
+        
+        <script src="application/packages/validationengine/validate.js"></script>
+        <script src="application/packages/validationengine/pravidla.js"></script>
     </body>
 </html>

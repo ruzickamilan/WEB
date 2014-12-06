@@ -9,7 +9,7 @@ class RegistraceKontroler extends Kontroler {
         
         if (!Session::isPrihlasen()) {
            $this->prihlaseni = getTlacitko();
-           $template_params['captcha'] = '<span class="col-sm-2 control-label">Ochrana proti spamu: <span style="color: red;">*</span></span><div class="col-sm-10"><div class="g-recaptcha" data-sitekey="6Le8ov4SAAAAAEJhUu4dhQT3aaneBS1ob7nNM-af"></div></div>';
+           $template_params['captcha'] = '<span class="col-sm-2 control-label">Ochrana proti spamu:</span><div class="col-sm-10"><div class="g-recaptcha" data-sitekey="6Le8ov4SAAAAAEJhUu4dhQT3aaneBS1ob7nNM-af"></div></div>';
         }
         else {
             $this->prihlaseni = getUzivatelskeMenu(Session::getEmail());
@@ -17,7 +17,7 @@ class RegistraceKontroler extends Kontroler {
         
         if (isset($_POST['jmeno']) && isset($_POST['email']) && isset($_POST['heslo1']) && isset($_POST['heslo2'])) {
             if ($_POST['heslo1'] == $_POST['heslo2']) {
-                if ((strlen($_POST['jmeno']) > 2) && (strlen($_POST['heslo1']) > 5)) {
+                if ((strlen($_POST['jmeno']) > 2) && (strlen($_POST['heslo1']) >= 5)) {
                     $recaptcha = $_POST['g-recaptcha-response'];
                     if (!empty($recaptcha)) {
                         $userIP = $_SERVER["REMOTE_ADDR"];

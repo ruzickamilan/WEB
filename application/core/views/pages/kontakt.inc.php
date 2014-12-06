@@ -1,6 +1,6 @@
 <script type="text/javascript" src="http://api4.mapy.cz/loader.js"></script>
 <script type="text/javascript">Loader.load()</script>
-<h2 class="page-header">Kontakt</h2>
+<h1 class="page-header">Kontakt</h1>
 <div class="col-md-8">
     <div id="mapa"></div>
     <script type="text/javascript">

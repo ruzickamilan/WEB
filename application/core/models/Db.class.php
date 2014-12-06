@@ -388,6 +388,26 @@ class Db {
             return 0;
         }
     }
+    
+    public function DBDelete($query) {
+        $statement = $this->connection->prepare($query);
+
+        $statement->execute();
+        
+        $errors = $statement->errorInfo();
+        
+        $mysql_pdo_error = false;
+        if ($errors[0] + 0 > 0) {
+            $mysql_pdo_error = true;
+        }
+
+        if ($mysql_pdo_error == false) {
+            return $statement->rowCount();
+        }
+        else {
+            return 0;
+        }
+    }
 
     // KONEC UNIVERZALNI METODY
     // ***********************************************************

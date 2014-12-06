@@ -6,7 +6,12 @@
     <table class="diskuze table-striped">
         <thead>
             <tr>
-                <td style="size: 150px; font-size: 20px;"><b>{{ dotaz['jmeno'] }}</b></td>
+                <td style="size: 150px; font-size: 20px;">
+                    {% if mazani == true %}
+                        <a href="?page=diskuze&amp;delDotaz={{ dotaz['id'] }}">{{ mazani | raw }}</a>
+                    {% endif %}
+                    <b>{{ dotaz['jmeno'] }}</b>
+                </td>
                 <td style="text-align: right;">{{ dotaz['cas'] }}<br /><a href="?page=diskuze&amp;reakce={{ dotaz['id'] }}">reagovat</a></td>
             </tr>
         </thead>
@@ -23,6 +28,9 @@
                         {% if dotaz['id'] == odpoved['diskuze_id'] %}
                             <p>
                                 <span class="features simptip-position-left simptip-fade" data-tooltip="{{ odpoved['cely_cas'] }}">
+                                {% if mazani == true %}
+                                    <a href="?page=diskuze&amp;delOdpoved={{ odpoved['presny_cas'] }}">{{ mazani | raw }}</a>
+                                {% endif %}
                                 <span class="glyphicon glyphicon-share-alt"></span>
                                 <b> {{ odpoved['cas'] }} {{ odpoved['jmeno'] }}:</b>
                                 </span>
@@ -43,7 +51,7 @@
                     <form id="reakce" style="padding-top: 90px; margin-top: -85px; margin-left: 30px;" class="form-horizontal" role="form" method="post" action="?page=diskuze">
                         <div class="form-group">
                             <div class="col-sm-offset-0 col-sm-10">
-                                <textarea class="form-control text-diskuze" autofocus="autofocus" rows="6" cols="120" name="text-reakce" placeholder="Text reakce"></textarea> 
+                                <textarea class="form-control text-diskuze" autofocus="autofocus" rows="6" cols="120" name="text_reakce" placeholder="Text reakce"></textarea> 
                                 <input type="hidden" name="id_diskuze" value="{{ id_diskuze | raw }}">
                             </div>
                         </div>
@@ -67,7 +75,7 @@
 </div>
 <hr>
 <h4 class="header">Položit nový dotaz:</h4><br />
-<form class="form-horizontal" role="form" method="post" action="?page=diskuze">
+<form id="mojePravidla" class="form-horizontal" role="form" method="post" action="?page=diskuze">
     <div class="form-group">
         <span class="col-sm-2 control-label">Jméno uživatele: </span>
         <div class="col-sm-10">

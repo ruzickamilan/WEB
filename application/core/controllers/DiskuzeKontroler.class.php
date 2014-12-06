@@ -53,8 +53,8 @@ class DiskuzeKontroler extends Kontroler{
             }
         }
         
-        if (isset($_POST['text-reakce']) && Session::isPrihlasen() && Session::getAutorizaceDis() == 1) {
-            $text = $_POST['text-reakce'];
+        if (isset($_POST['text_reakce']) && Session::isPrihlasen() && Session::getAutorizaceDis() == 1) {
+            $text = $_POST['text_reakce'];
             $id_diskuze = $_POST['id_diskuze'];
             $id_uzivatele = Session::getId();
             $vysledek = $diskuze->vlozReakci($text, $id_diskuze, $id_uzivatele);
@@ -63,6 +63,17 @@ class DiskuzeKontroler extends Kontroler{
         
         if (Session::isPrihlasen()) {
             $this->prihlaseni = getUzivatelskeMenu(Session::getEmail());
+            if (Session::getTypUctu() == 'admin') {
+                $template_params['mazani'] = "<span style='color: red;' class='glyphicon glyphicon-remove'></span>";
+                if (isset($_REQUEST["delDotaz"])) {
+                    $vysledek = $diskuze->smazDotaz($_REQUEST["delDotaz"]);
+                    $this->info = $vysledek;
+                }
+                if (isset($_REQUEST["delOdpoved"])) {
+                    $vysledek = $diskuze->smazOdpoved($_REQUEST["delOdpoved"]);
+                    $this->info = $vysledek;
+                }
+            }
             $template_params['jmeno'] = "<span style='color: black;' class='form-control'>".Session::getJmenoDis()."</span>";
         }
         else {

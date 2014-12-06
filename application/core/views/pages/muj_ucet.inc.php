@@ -1,4 +1,4 @@
-<h2 class="page-header">Můj účet</h2>
+<h1 class="page-header">Můj účet</h1>
 <table class="table table-bordered table-hover" data-cache="false" data-height="299">
     <tbody>
         <tr>
@@ -23,3 +23,5 @@
         </tr>
     </tbody>
 </table>
+<a href="?page=zmena_hesla">Změna hesla</a><br />
+{{ menu_admina | raw }}

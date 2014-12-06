@@ -1,5 +1,5 @@
-<h2 class="page-header">Úprava osobních údajů</h2>
-<form class="form-horizontal" role="form" method="post" action="?page=muj_ucet">
+<h1 class="page-header">Úprava osobních údajů</h1>
+<form id="mojePravidla" class="form-horizontal" role="form" method="post" action="?page=muj_ucet">
     <div class="form-group">
         <span class="col-sm-2 control-label">Jméno:</span>
         <div class="col-sm-10">
