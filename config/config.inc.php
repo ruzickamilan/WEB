@@ -39,6 +39,8 @@ define('TABLE_PREFIX', '');
 define('UZIVATEL', TABLE_PREFIX.'uzivatel');
 define('DISKUZE', TABLE_PREFIX.'diskuze');
 define('ODPOVED', TABLE_PREFIX.'odpoved');
+define('ZPRAVA', TABLE_PREFIX.'zprava');
+define('PRIJEMCE', TABLE_PREFIX.'prijemce');
 
 // NACTE TWIG
 require_once 'application/packages/twig/lib/Twig/Autoloader.php';

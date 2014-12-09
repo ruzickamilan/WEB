@@ -28,6 +28,7 @@ class DiskuzeKontroler extends Kontroler{
             $text = $_POST['text'];
             if (!Session::isPrihlasen()) {
                 $jmeno = $_POST['jmeno'];
+                $email = $_POST['email'];
                 $recaptcha = $_POST['g-recaptcha-response'];
                 if (!empty($recaptcha)) {
                     $userIP = $_SERVER["REMOTE_ADDR"];
@@ -38,7 +39,7 @@ class DiskuzeKontroler extends Kontroler{
                         $this->info = '<div class="alert alert-danger" role="alert">Neprošli jste kontrolou!</div>';
                     }
                     else {
-                        $vysledek = $diskuze->vlozDotaz($jmeno, $text);
+                        $vysledek = $diskuze->vlozDotaz($jmeno, $email, $text, 1);
                         $this->info = $vysledek;
                     }
                 } 
@@ -48,7 +49,8 @@ class DiskuzeKontroler extends Kontroler{
             } 
             else {
                 $jmeno = Session::getJmenoDis();
-                $vysledek = $diskuze->vlozDotaz($jmeno, $text);
+                $email = Session::getEmail();
+                $vysledek = $diskuze->vlozDotaz($jmeno, $email, $text, 0);
                 $this->info = $vysledek;
             }
         }
@@ -75,10 +77,12 @@ class DiskuzeKontroler extends Kontroler{
                 }
             }
             $template_params['jmeno'] = "<span style='color: black;' class='form-control'>".Session::getJmenoDis()."</span>";
+            $template_params['email'] = "<span style='color: black;' class='form-control'>".Session::getEmail()."</span>";
         }
         else {
             $this->prihlaseni = getTlacitko();
             $template_params['jmeno'] = '<input type="text" class="form-control" placeholder="Jméno uživatele" name="jmeno" value="">';
+            $template_params['email'] = '<input type="text" class="form-control" placeholder="Váš email (nebude zobrazen)" name="email" value="">';
             $template_params['captcha'] = '<span class="col-sm-2 control-label">Ochrana proti spamu: </span><div class="col-sm-10"><div class="g-recaptcha" data-sitekey="6Le8ov4SAAAAAEJhUu4dhQT3aaneBS1ob7nNM-af"></div></div>';
         }
         

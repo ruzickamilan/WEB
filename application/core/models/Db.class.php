@@ -107,7 +107,7 @@ class Db {
             return $row;
         } else {
             echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
+            printr("", $errors);
             echo "SQL dotaz: $query";
         }
     }
@@ -222,7 +222,7 @@ class Db {
             return $rows;
         } else {
             echo "Chyba v dotazu - PDOStatement::errorInfo(): ";
-            printr($errors);
+            printr("", $errors);
             echo "SQL dotaz: $query";
         }
     }
@@ -289,82 +289,8 @@ class Db {
         if ($this->mysql_pdo_error == true) {
             return true;
         } else {
-            //printr($errors);
+            //printr("", $errors);
             //echo "SQL dotaz: $query";
-            return false;
-        }
-    }
-
-    /**
-     * Pridat polozku do DB - rozsirena verze.
-     *
-     * @param string $table_name
-     * @param array $item - column = sloupec; value - int nebo string nebo value_mysql
-     */
-    public function DBInsertExpanded($table_name, $item) {
-        // MySql
-        // SLOZIT TEXT STATEMENTU s otaznikama
-        $insert_columns = "";
-        $insert_values = "";
-
-        if ($item != null)
-            foreach ($item as $row) {
-                // pridat carky
-                if ($insert_columns != "")
-                    $insert_columns .= ", ";
-                if ($insert_columns != "")
-                    $insert_values .= ", ";
-
-                $column = $row["column"];
-
-                if (key_exists("value", $row))
-                    $value_pom = "?";       // budu to navazovat
-                else if (key_exists("value_mysql", $row))
-                    $value_pom = $row["value_mysql"];   // je to systemove, vlozit rovnou - POZOR na SQL injection, tady to muze projit
-
-
-                $insert_columns .= "`$column`";
-                $insert_values .= "$value_pom";
-            }
-
-        // 1) pripravit dotaz s dotaznikama
-        $query = "insert into `$table_name` ($insert_columns) values ($insert_values);";
-        // echo $query;
-        // 2) pripravit si statement
-        $statement = $this->connection->prepare($query);
-
-        // 3) NAVAZAT HODNOTY k otaznikum dle poradi od 1
-        $bind_param_number = 1;
-
-        if ($item != null)
-            foreach ($item as $row) {
-                if (key_exists("value", $row)) {
-                    $value = $row["value"];
-                    //echo "navazuju value: $value";
-
-                    $statement->bindValue($bind_param_number, $value);  // vzdy musim dat value, abych si nesparoval promennou (to nechci)
-                    $bind_param_number ++;
-                }
-            }
-
-        // 4) provest dotaz
-        $statement->execute();
-
-        // 5) kontrola chyb
-        $errors = $statement->errorInfo();
-        //printr($errors);
-
-        if ($errors[0] + 0 > 0) {
-            // nalezena chyba
-            $this->mysql_pdo_error = false;
-        }
-
-        // 6) vratit chybu nebo OK
-        if ($this->mysql_pdo_error == true) {
-            return true;
-        } else {
-            printr($errors);
-            echo "SQL dotaz: $query";
             return false;
         }
     }

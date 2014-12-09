@@ -13,16 +13,16 @@ class SpravaUzivateluKontroler extends Kontroler {
             if (Session::getTypUctu() == "admin") {
                 $sprava_uzivatelu = new DbSpravaUzivatelu();
                 
-                if (isset($_POST['povysit']) && isset($_POST['prava'])) {
-                    $vysledek = $sprava_uzivatelu->povysUzivatele($_POST['prava'][0]);
+                if (isset($_POST['povysit']) && isset($_POST['povysit_radio'])) {
+                    $vysledek = $sprava_uzivatelu->povysUzivatele($_POST['povysit_radio'][0]);
                     $this->info = $vysledek;
                 }
-                if (isset($_POST['ban']) && isset($_POST['ban'])) {
-                    $vysledek = $sprava_uzivatelu->zablokujUzivatele($_POST['ban'][0]);
+                if (isset($_POST['ban']) && isset($_POST['ban_radio'])) {
+                    $vysledek = $sprava_uzivatelu->zablokujUzivatele($_POST['ban_radio'][0]);
                     $this->info = $vysledek;
                 }
-                if (isset($_POST['unban']) && isset($_POST['unban'])) {
-                    $vysledek = $sprava_uzivatelu->odblokujUzivatele($_POST['unban'][0]);
+                if (isset($_POST['unban']) && isset($_POST['unban_radio'])) {
+                    $vysledek = $sprava_uzivatelu->odblokujUzivatele($_POST['unban_radio'][0]);
                     $this->info = $vysledek;
                 }
                 

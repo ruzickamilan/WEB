@@ -29,7 +29,7 @@ class MujUcetKontroler extends Kontroler {
                     $jmeno = $_POST['jmeno'];
                     $telefon = $_POST['telefon'];
                     $uprava_udaju = new DbMujUcet;
-                    $vysledek = $uprava_udaju->upravUzivatele($id, $jmeno, $telefon);
+                    $vysledek = $uprava_udaju->upravUzivatele($id, $jmeno,  Session::getEmail(), $telefon);
                     $this->info = $vysledek;
                 }
                 else {

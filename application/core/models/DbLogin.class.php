@@ -29,16 +29,18 @@ class DbLogin extends Db {
             if ($row['ban'] == 0) {
                 Session::login();
                 Session::pamatujUzivatele($row['id'], $row['jmeno'], $row['email'], $row['telefon'], $row['typ_uctu'], $row['autorizace']);
+                $this->db->Disconnect();
                 return "OK";
             }
             else {
+                $this->db->Disconnect();
                 return '<div class="alert alert-danger" role="alert">Tento účet byl zablokován z důvodu nevhodného chování na serveru!</div>';
             }
         }
         else {
+            $this->db->Disconnect();
             return '<div class="alert alert-danger" role="alert">Neplatný uživatel! Zkontroluj si své přihlašovací údaje.<br /><a href="?page=zapomenute_heslo">Zapomněl(a) jsem heslo</a></div>';
         }
-        $this->db->Disconnect();
     }
 }
 

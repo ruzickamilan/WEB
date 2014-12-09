@@ -83,7 +83,13 @@
         </div>
     </div>
     <div class="form-group">
-        <span class="col-sm-2 control-label">Text dotazu: </span>
+        <span class="col-sm-2 control-label">Váš email: </span>
+        <div class="col-sm-10">
+            {{ email | raw }}
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="col-sm-2 control-label">Text dotazu:</span>
         <div class="col-sm-10">
             <textarea class="form-control text-diskuze" rows="6" cols="120" name="text" placeholder="Text dotazu"></textarea> 
         </div>

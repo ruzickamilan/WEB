@@ -47,9 +47,9 @@
                             <span style='color: red;' class='glyphicon glyphicon-remove'></span>
                         {% endif %}
                     </td>
-                    <td style="text-align: center;"><input type="radio" name="prava[]" value="{{ uzivatel['id'] }}"></td>
-                    <td style="text-align: center;"><input type="radio" name="ban[]" value="{{ uzivatel['id'] }}"></td>
-                    <td style="text-align: center;"><input type="radio" name="unban[]" value="{{ uzivatel['id'] }}"></td>
+                    <td style="text-align: center;"><input type="radio" name="povysit_radio[]" value="{{ uzivatel['id'] }}"></td>
+                    <td style="text-align: center;"><input type="radio" name="ban_radio[]" value="{{ uzivatel['id'] }}"></td>
+                    <td style="text-align: center;"><input type="radio" name="unban_radio[]" value="{{ uzivatel['id'] }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>

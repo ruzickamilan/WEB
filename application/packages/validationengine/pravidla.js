@@ -36,11 +36,21 @@ $(document).ready(function () {
                 minlength: "Text musí mít alespoň 10 znaků!",
                 maxlength: "Text může mít maximálně 500 znaků!"
             },
+            text_zpravy: {
+                required: "Zadej nějaký text!",
+                minlength: "Text musí mít alespoň 10 znaků!",
+                maxlength: "Text může mít maximálně 1000 znaků!"
+            },
             telefon: {
                 number: "Zadej své telefonní číslo!",
                 minlength: "Telefon musí mít nejméně 9 znaků!",
                 maxlength: "Telefon může mít maximálně 9 znaků!",
                 digits: "Telefon musí obsahovat jen číslice!"
+            },
+            predmet: {
+                required: "Zadej předmět!",
+                minlength: "Předmět musí mít alespoň 3 znaky!",
+                maxlength: "Předmět může mít maximálně 20 znaků!"
             }
         },
         rules: {
@@ -79,12 +89,22 @@ $(document).ready(function () {
                 minlength: 10,
                 maxlength: 500
             },
+            text_zpravy: {
+                required: true,
+                minlength: 10,
+                maxlength: 1000
+            },
             telefon: {
                 minlength: 9,
                 maxlength: 9,
                 digits: true,
                 number: true
             },
+            predmet: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            }
         }
     });
     

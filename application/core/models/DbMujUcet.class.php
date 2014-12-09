@@ -9,13 +9,15 @@ class DbMujUcet extends Db {
         $this->db->Connect();
     }
     
-    public function upravUzivatele($id, $jmeno, $telefon) {
-        $query = "UPDATE " . UZIVATEL . " SET jmeno = '".$jmeno."', telefon = '".$telefon."' WHERE id = ".$id.";";
+    public function upravUzivatele($id, $jmeno, $email, $telefon) {
+        $query1 = "UPDATE " . UZIVATEL . " SET jmeno = '".$jmeno."', telefon = '".$telefon."' WHERE id = ".$id.";";
+        $query2 = "UPDATE " . DISKUZE . " SET jmeno = '".$jmeno."' WHERE email = '".$email."';";
         
-        $result = $this->db->DBUpdate($query);
+        $result = $this->db->DBUpdate($query1);
         if ($result == 1) {
             Session::setTelefon($telefon);
             Session::setJmeno($jmeno);
+            $this->db->DBUpdate($query2);
             $this->db->Disconnect();
             return '<div class="alert alert-success" role="alert">Úprava údajů proběhla v pořádku!</div>';
         } else {

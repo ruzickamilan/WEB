@@ -172,4 +172,7 @@ label.error {
     margin-left: 5px;
     margin-bottom: -8px;
 }
+#myCarousel {
+    max-height: 300px;
+}
 

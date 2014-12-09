@@ -9,20 +9,35 @@ class DbDiskuze extends Db {
         $this->db->Connect();
     }
     
-    public function vlozDotaz($jmeno, $text) {
-        $cas = date("Y-m-d H:i:s");
-        $items = array(
-            'id' => 0,
-            'jmeno' => $jmeno,
-            'cas' => $cas,
-            'text' => $text
-        );
-        $result = $this->db->DBInsert(DISKUZE, $items);
-        if ($result) {
-            return '<div class="alert alert-success" role="alert">Dotaz byl úspěšně přidán k ostatním!</div>';
+    public function vlozDotaz($jmeno, $email, $text, $kontrola_emailu) {
+        if ($kontrola_emailu == 0) {
+            $cas = date("Y-m-d H:i:s");
+            $items = array(
+                'id' => 0,
+                'jmeno' => $jmeno,
+                'email' => $email,
+                'cas' => $cas,
+                'text' => $text
+            );
+            $result = $this->db->DBInsert(DISKUZE, $items);
+            if ($result) {
+                return '<div class="alert alert-success" role="alert">Dotaz byl úspěšně přidán k ostatním!</div>';
+            }
+            else {
+                return '<div class="alert alert-danger" role="alert">Někde nastala chyba!</div>';
+            }
         }
         else {
-            return '<div class="alert alert-danger" role="alert">Někde nastala chyba!</div>';
+            $columns = "jmeno";
+            $where = array(array('column' => "email", 'symbol' => " = ", 'value' => "".$email.""));
+
+            $row = $this->db->DBSelectOne(UZIVATEL, $columns, $where);
+            if (!$row) {
+                $this->vlozDotaz($jmeno, $email, $text, 0);
+            }
+            else {
+                return '<div class="alert alert-danger" role="alert">Pod tímto emailem je již někdo registrován! Piště nové dotazy po přihlášení.</div>';
+            }
         }
     }   
     public function vlozReakci($text, $id_diskuze, $id_uzivatele) {
@@ -43,10 +58,16 @@ class DbDiskuze extends Db {
     }
     
     public function vypisDiskuzi() {
-        $columns = "id, jmeno, DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cas', text";
+        $columns = "id, jmeno, email, DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cas', text";
         $where = array();
+        $orderby = array(
+            array(
+                'column' => 'cas',
+                'sort' => 'DESC'
+            )
+        );
         
-        $rows = $this->db->DBSelectAll(DISKUZE, $columns, $where);
+        $rows = $this->db->DBSelectAll(DISKUZE, $columns, $where, "", $orderby);
         if ($rows) {
             return $rows;
         }
