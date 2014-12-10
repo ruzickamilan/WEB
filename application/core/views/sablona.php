@@ -44,10 +44,10 @@
                             <a href="?page=uvod">O nás</a>
                         </li>
                         <li>
-                            <a href="?page=minulost">Minulost</a>
+                            <a href="?page=obsah/minulost">Minulost</a>
                         </li>
                         <li>
-                            <a href="?page=pritomnost">Přítomnost</a>
+                            <a href="?page=obsah/pritomnost">Přítomnost</a>
                         </li>
                         <li>
                             <a href="?page=diskuze">Diskuze</a>
@@ -78,19 +78,19 @@
             <div class="carousel-inner">
 
                 <div class="item active">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                    <div class="fill" style="background-image:url('images/fotka1.jpg');"></div>
                     <div class="carousel-caption">
                         <!-- Popisek 1 -->
                     </div>
                 </div>
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+                    <div class="fill" style="background-image:url('images/fotka2.jpg');"></div>
                     <div class="carousel-caption">
                         <!-- Popisek 2 -->
                     </div>
                 </div>
                 <div class="item">
-                    <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+                    <div class="fill" style="background-image:url('images/fotka3.jpg')"></div>
                     <div class="carousel-caption">
                         <!-- Popisek 3 -->
                     </div>
@@ -104,64 +104,64 @@
                 <div class="col-md-3" style="margin-top: 45px;">
 
                     <!-- Zacatek menu -->
-                    <ul style = "border: 2px solid lightgray; border-radius: 5px;" id="postranniMenu" class="menu">
-                        <li style="border-top: none; border-radius: 3px 3px 0 0;">
+                    <ul style = "border: 1px solid lightgray;" id="postranniMenu" class="menu">
+                        <li style="border-top: none;">
                             <a href="#">Finanční služby <span class="glyphicon arrow"></span></a>
                             <ul>
-                                <li><a href="?page=pro_obcany">Pro občany</a></li>
+                                <li><a href="?page=obsah/pro_obcany">Pro občany</a></li>
                                 <li>
                                     <a href="#">Pro podnikatele <span class="fa plus-minus"></span></a>
                                     <ul>
-                                        <li><a href="?page=pro_podnikatele/sporeni">Spoření</a></li>
-                                        <li><a href="?page=pro_podnikatele/stavebni_sporeni">Stavební spoření</a></li>
+                                        <li><a href="?page=obsah/pro_podnikatele/sporeni">Spoření</a></li>
+                                        <li><a href="?page=obsah/pro_podnikatele/stavebni_sporeni">Stavební spoření</a></li>
                                         <li>
                                             <a href="#">Úvěry <span class="fa plus-minus"></span></a>
                                             <ul>
-                                                <li><a href="?page=pro_podnikatele/uvery/bankovni">Bankovní</a></li>
-                                                <li><a href="?page=pro_podnikatele/uvery/nebankovni">Nebankovní</a></li>
+                                                <li><a href="?page=obsah/pro_podnikatele/uvery/bankovni">Bankovní</a></li>
+                                                <li><a href="?page=obsah/pro_podnikatele/uvery/nebankovni">Nebankovní</a></li>
                                             </ul>
                                         </li>
                                         <li>
                                             <a href="#">Pojištění <span class="fa plus-minus"></span></a>
                                             <ul>
-                                                <li><a href="?page=pojisteni/zivotni">Životní</a></li>
-                                                <li><a href="?page=pojisteni/majetkove">Majetkové</a></li>
-                                                <li><a href="?page=pojisteni/penzijni">Penzijní</a></li>
+                                                <li><a href="?page=obsah/pro_podnikatele/pojisteni/zivotni">Životní</a></li>
+                                                <li><a href="?page=obsah/pro_podnikatele/pojisteni/majetkove">Majetkové</a></li>
+                                                <li><a href="?page=obsah/pro_podnikatele/pojisteni/penzijni">Penzijní</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="?page=investicni_plany">Investiční plány</a></li>
+                                        <li><a href="?page=obsah/pro_podnikatele/investicni_plany">Investiční plány</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="?page=oddluzeni">Oddlužení</a>
+                            <a href="?page=obsah/oddluzeni">Oddlužení</a>
                         </li>
                         <li>
-                            <a href="?page=insolvence">Insolvence</a>
+                            <a href="?page=obsah/insolvence">Insolvence</a>
                         </li>
                         <li>
-                            <a href="?page=podnikatelske_zamery">Podnikatelské záměry</a>
+                            <a href="?page=obsah/podnikatelske_zamery">Podnikatelské záměry</a>
                         </li>
                         <li>
                             <a href="#">Realitní služby <span class="glyphicon arrow"></span></a>
                             <ul>
-                                <li><a href="?page=nakup">Nákup</a></li>
-                                <li><a href="?page=prodej">Prodej</a></li>
+                                <li><a href="?page=obsah/nakup">Nákup</a></li>
+                                <li><a href="?page=obsah/prodej">Prodej</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="?page=administrativni_sluzby">Administrativní služby</a>
+                            <a href="?page=obsah/administrativni_sluzby">Administrativní služby</a>
                         </li>
-                        <li style="border-radius: 0 0 3px 3px;">
-                            <a href="?page=pravni_servis" id="posledniPolozkaMenu">Právní servis</a>
+                        <li>
+                            <a href="?page=obsah/pravni_servis" id="posledniPolozkaMenu">Právní servis</a>
                         </li>
                     </ul>
                 </div>
                 <!-- Konec menu -->
 
                 <div id = "obsah" class="col-md-9">
-                    <div id="infoProuzek">
+                    <div id = "infoProuzek">
                         {{ info | raw }}
                     </div>
                     {{ obsah | raw }}
@@ -188,12 +188,18 @@
         <script src="application/packages/bootstrap/js/bootstrap.min.js"></script>
         <script src="application/packages/bootstrap/js/metismenu.min.js"></script>
         <!-- Animace přechodu k dané reakci -->
+        <!--<script>
+            document.getElementById("myCarousel").style.display = "none";
+            
+            $('html, body').animate({
+                scrollTop: $('#skok').offset().top
+            }, 0);
+        </script>-->
         <script>
             $('html, body').animate({
                 scrollTop: $('#reakce').offset().top
             }, 1000);
         </script>
-
         <!-- Script to Activate the Carousel and menu -->
         <script>
             $('.carousel').carousel({

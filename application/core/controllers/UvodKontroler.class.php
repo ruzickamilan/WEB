@@ -1,4 +1,3 @@
-
 <?php
 
 class UvodKontroler extends Kontroler {

@@ -51,11 +51,16 @@ require 'config/functions.inc.php';
 
 // NACTE TRIDY
 spl_autoload_register(function($trida) {
-    if (preg_match('#Db#', $trida)) {
+    if (preg_match('/Db/', $trida)) {
         require_once(MODELY . $trida . ".class.php");
     } 
     else {
-        require_once(KONTROLERY . $trida . ".class.php");
+        if (file_exists(KONTROLERY . $trida . '.class.php')) {
+            require_once(KONTROLERY . $trida . ".class.php");
+        } 
+        else {
+            require_once(KONTROLERY . "obsah/" . $trida . ".class.php");
+        }
     }
 });
 

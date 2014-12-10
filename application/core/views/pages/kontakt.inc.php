@@ -41,5 +41,3 @@
         <span class="glyphicon glyphicon-time"></span> &nbsp;Po - Pá: 9:00 - 17:00
     </p>
 </div>
-
-

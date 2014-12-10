@@ -19,8 +19,7 @@ class Smerovac extends Kontroler {
         $naparsovanaURL = parse_url($URL);
         $poleURL = explode("/", $naparsovanaURL['path']);
         
-        $tridaKontroleru = $this->getKontrolerJmeno(($poleURL[0])) . 'Kontroler';
-        
+        $tridaKontroleru = $this->getKontrolerJmeno($poleURL[count($poleURL)-1]) . 'Kontroler';
         if (file_exists(KONTROLERY . $tridaKontroleru . '.class.php')) {
             
             if ($tridaKontroleru == "Kontroler") {
@@ -31,8 +30,17 @@ class Smerovac extends Kontroler {
                 $this->cesta = implode("/", $naparsovanaURL);
             }
         } 
+        else if (file_exists(KONTROLERY . "obsah/" . $tridaKontroleru . '.class.php')) {
+            if ($tridaKontroleru == "obsah/Kontroler") {
+                $this->presmeruj("?page=uvod");
+            } 
+            else {
+                $this->kontroler = $tridaKontroleru;
+                $this->cesta = implode("/", $naparsovanaURL);
+            }
+        }
         else {
-            $this->presmeruj("?page=error");
+            //$this->presmeruj("?page=error");
         }
     }
 
