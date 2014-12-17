@@ -55,13 +55,7 @@ class DbSoukromeZpravy extends Db {
     
     public function nactiPrijemceAdmin() {
         $columns = "jmeno, email";
-        $where = array(
-                    array(
-                        'column' => "typ_uctu != 'admin'",
-                        'symbol' => "",
-                        'value' => ""
-                    )
-                );
+        $where = array();
         
         $rows = $this->db->DBSelectAll(UZIVATEL, $columns, $where);
         if ($rows) {
@@ -74,11 +68,13 @@ class DbSoukromeZpravy extends Db {
     
     public function novaZprava($id_odesilatele, $email_prijemce, $predmet, $text) {
         $cas = date("Y-m-d H:i:s");
+        $kod_zpravy = nahodny_retezec(20);
         $items = array(
             'id' => 0,
             'cas' => $cas,
             'predmet' => $predmet,
             'text' => $text,
+            'kod_zpravy' => $kod_zpravy,
             'uzivatel_id' => $id_odesilatele
         );
         $result = $this->db->DBInsert(ZPRAVA, $items);
@@ -88,9 +84,11 @@ class DbSoukromeZpravy extends Db {
             $row1 = $this->db->DBSelectOne(UZIVATEL, $columns, $where);
             if ($row1) {
                 $columns = "id";
-                $where = array(array('column' => "cas", 'symbol' => " = ", 'value' => "".$cas.""));
+                $where = array(array('column' => "kod_zpravy", 'symbol' => " = ", 'value' => "".$kod_zpravy.""));
                 $row2 = $this->db->DBSelectOne(ZPRAVA, $columns, $where);
                 if ($row2) {
+                    $query = "UPDATE " . ZPRAVA . " SET kod_zpravy = 'odeslano' WHERE kod_zpravy = '" . $kod_zpravy . "';";
+                    $this->db->DBUpdate($query);
                     $items = array(
                         'uzivatel_id' => $row1['id'],
                         'zprava_id' => $row2['id']
@@ -130,7 +128,6 @@ class DbSoukromeZpravy extends Db {
         if ($rows) {
             for ($i = 0; $i < count($rows); $i++) {
                 $this->novaZprava($id_odesilatele, $rows[$i]['email'], $predmet, $text);
-                $i++;
             }
             return '<div class="alert alert-success" role="alert">Zprávy byly úspěšně odeslány!</div>';
         }
@@ -153,7 +150,6 @@ class DbSoukromeZpravy extends Db {
         if ($rows) {
             for ($i = 0; $i < count($rows); $i++) {
                 $this->novaZprava($id_odesilatele, $rows[$i]['email'], $predmet, $text);
-                $i++;
             }
             return '<div class="alert alert-success" role="alert">Zprávy byly úspěšně odeslány!</div>';
         }
@@ -164,7 +160,7 @@ class DbSoukromeZpravy extends Db {
     
     public function smazZpravy($ids) {
         $query1 = "DELETE FROM " . PRIJEMCE . " WHERE zprava_id IN (".$ids.");";
-        $query2 = "DELETE FROM " . ZPRAVA . " WHERE id IN ('".$ids."');";
+        $query2 = "DELETE FROM " . ZPRAVA . " WHERE id IN (".$ids.");";
         
         $result1 = $this->db->DBDelete($query1);
         $result2 = $this->db->DBDelete($query2);

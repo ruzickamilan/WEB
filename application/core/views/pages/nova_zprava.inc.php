@@ -42,3 +42,5 @@
         </div>
     </div>
 </form>
+<br /><a href="?page=soukrome_zpravy">Zpět na soukromé zprávy</a>
+<br /><a href="?page=muj_ucet">Zpět na můj účet</a>

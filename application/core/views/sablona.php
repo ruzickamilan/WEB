@@ -166,6 +166,7 @@
                     </div>
                     {{ obsah | raw }}
                 </div>
+                
             </div>
             <!-- /.row -->
 
@@ -187,27 +188,16 @@
         <script src="application/packages/bootstrap/js/jquery.min.js"></script>
         <script src="application/packages/bootstrap/js/bootstrap.min.js"></script>
         <script src="application/packages/bootstrap/js/metismenu.min.js"></script>
-        <!-- Animace přechodu k dané reakci -->
-        <!--<script>
-            document.getElementById("myCarousel").style.display = "none";
-            
-            $('html, body').animate({
-                scrollTop: $('#skok').offset().top
-            }, 0);
-        </script>-->
-        <script>
-            $('html, body').animate({
-                scrollTop: $('#reakce').offset().top
-            }, 1000);
-        </script>
-        <!-- Script to Activate the Carousel and menu -->
-        <script>
-            $('.carousel').carousel({
-                interval: 5000
-            });
-            $(document).ready(function () {
+        <!-- Animace menu, slideshow a prechodu -->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.scroll').on('click',function(){
+                    $('html, body').animate({scrollTop: $("#novyDotaz").offset().top - 60}, 1000);
+                });
+                $('.carousel').carousel({interval: 5000});
                 $('#postranniMenu').metisMenu();
             });
+            $('html, body').animate({scrollTop: $('#reakce').offset().top - 90}, 1000);
         </script>
         
         <script src="application/packages/validationengine/validate.js"></script>

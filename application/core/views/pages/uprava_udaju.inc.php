@@ -18,3 +18,4 @@
         </div>
     </div>
 </form>
+<br /><a href="?page=muj_ucet">Zpět do mého účtu</a>

@@ -39,7 +39,18 @@ class DbDiskuze extends Db {
                 return '<div class="alert alert-danger" role="alert">Pod tímto emailem je již někdo registrován! Piště nové dotazy po přihlášení.</div>';
             }
         }
-    }   
+    }
+    
+    public function upravDotaz($id, $text, $email_editora) {
+        $query = "UPDATE " . DISKUZE . " SET text = '" . $text ."' WHERE id = " . $id . " AND email = '" . $email_editora . "';";
+        $result = $this->db->DBUpdate($query);
+        if ($result == 1) {
+            return '<div class="alert alert-success" role="alert">Dotaz byl úspěšně upraven!</div>';
+        } else {
+            return '<div class="alert alert-danger" role="alert">Někde nastala chyba!</div>';
+        }
+    }
+    
     public function vlozReakci($text, $id_diskuze, $id_uzivatele) {
         $cas = date("Y-m-d H:i:s");
         $items = array(
@@ -58,11 +69,11 @@ class DbDiskuze extends Db {
     }
     
     public function vypisDiskuzi() {
-        $columns = "id, jmeno, email, DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cas', text";
+        $columns = "id, jmeno, email, cas AS 'orig_cas', DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cas', text";
         $where = array();
         $orderby = array(
             array(
-                'column' => 'cas',
+                'column' => 'orig_cas',
                 'sort' => 'DESC'
             )
         );
@@ -77,16 +88,22 @@ class DbDiskuze extends Db {
     }
     
     public function vypisOdpovedi() {
-        $columns = "jmeno, cas AS 'presny_cas', DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cely_cas', DATE_FORMAT(cas, '(%H:%i)') AS 'cas', text, diskuze_id, uzivatel_id";
+        $columns = "t2.id, jmeno, DATE_FORMAT(cas, '%H:%i (%d.%m.%Y)') AS 'cely_cas', DATE_FORMAT(cas, '(%H:%i)') AS 'cas', text, diskuze_id, uzivatel_id";
         $where = array(
                     array(
-                        'column' => "t1.id = t2.uzivatel_id order by t2.cas",
+                        'column' => "t1.id = t2.uzivatel_id",
                         'symbol' => "",
                         'value' => ""
                     )
                 );
+        $orderby = array(
+            array(
+                'column' => 'id',
+                'sort' => 'ASC'
+            )
+        );
         
-        $rows = $this->db->DBSelectAll(UZIVATEL." t1 JOIN ".ODPOVED." t2", $columns, $where);
+        $rows = $this->db->DBSelectAll(UZIVATEL." t1 JOIN ".ODPOVED." t2", $columns, $where, "", $orderby);
         if ($rows) {
             return $rows;
         }
@@ -108,8 +125,8 @@ class DbDiskuze extends Db {
         }
     }
 
-    public function smazOdpoved($cas) {
-        $query = "DELETE FROM " . ODPOVED . " WHERE cas = '".$cas."';";
+    public function smazOdpoved($id) {
+        $query = "DELETE FROM " . ODPOVED . " WHERE id = '".$id."';";
         
         $result = $this->db->DBDelete($query);
         if ($result == 1) {

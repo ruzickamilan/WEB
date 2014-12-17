@@ -1,5 +1,5 @@
 <script src='https://www.google.com/recaptcha/api.js'></script>
-<h1 class="page-header">Diskuze</h1>
+<h1 class="page-header">Diskuze <span style="font-size: 14px;"><a class="scroll" href="#">Položit nový dotaz</a></span></h1>
 <div>
     {% set zadny_dotaz = 'true' %}
     {% for dotaz in diskuze %}
@@ -8,7 +8,10 @@
             <tr>
                 <td style="size: 150px; font-size: 20px;">
                     {% if mazani == true %}
-                        <a href="?page=diskuze&amp;delDotaz={{ dotaz['id'] }}">{{ mazani | raw }}</a>
+                        <a title="Smazat" href="?page=diskuze&amp;delDotaz={{ dotaz['id'] }}">{{ mazani | raw }}</a>
+                    {% endif %}
+                    {% if email_edit == dotaz['email'] %}
+                    <a title="Upravit" href="?page=diskuze&amp;editDotaz={{ dotaz['id'] }}"><span style="color: blue;" class="glyphicon glyphicon-pencil"></span></a>
                     {% endif %}
                     <b>{{ dotaz['jmeno'] }}</b>
                 </td>
@@ -29,7 +32,7 @@
                             <p>
                                 <span class="features simptip-position-left simptip-fade" data-tooltip="{{ odpoved['cely_cas'] }}">
                                 {% if mazani == true %}
-                                    <a href="?page=diskuze&amp;delOdpoved={{ odpoved['presny_cas'] }}">{{ mazani | raw }}</a>
+                                    <a href="?page=diskuze&amp;delOdpoved={{ odpoved['id'] }}">{{ mazani | raw }}</a>
                                 {% endif %}
                                 <span class="glyphicon glyphicon-share-alt"></span>
                                 <b> {{ odpoved['cas'] }} {{ odpoved['jmeno'] }}:</b>
@@ -48,7 +51,7 @@
             <tr>
                 <td colspan="2">
                     <h4>Nová reakce:</h4>
-                    <form id="reakce" style="padding-top: 90px; margin-top: -85px; margin-left: 30px;" class="form-horizontal" role="form" method="post" action="?page=diskuze">
+                    <form id="reakce" style="margin-left: 30px;" class="form-horizontal" role="form" method="post" action="?page=diskuze">
                         <div class="form-group">
                             <div class="col-sm-offset-0 col-sm-10">
                                 <textarea class="form-control text-diskuze" autofocus="autofocus" rows="6" cols="120" name="text_reakce" placeholder="Text reakce"></textarea> 
@@ -64,6 +67,28 @@
                 </td>
             </tr>
             {% endif %}
+            {% if email_edit == dotaz['email'] %}
+                {% if id_upravy == dotaz['id'] %}
+                <tr>
+                    <td colspan="2">
+                        <h4>Upravit dotaz:</h4>
+                        <form id="reakce" style="margin-left: 30px;" class="form-horizontal" role="form" method="post" action="?page=diskuze">
+                            <div class="form-group">
+                                <div class="col-sm-offset-0 col-sm-10">
+                                    <textarea class="form-control text-diskuze" autofocus="autofocus" rows="6" cols="120" name="text_upravy">{{ dotaz['text'] }}</textarea> 
+                                    <input type="hidden" name="id_diskuze" value="{{ dotaz['id'] }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-0 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Upravit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endif %}
         </tbody>
     </table>
     <br />
@@ -74,6 +99,7 @@
     {% endif %}
 </div>
 <hr>
+<div id="novyDotaz">
 <h4 class="header">Položit nový dotaz:</h4><br />
 <form id="mojePravidla" class="form-horizontal" role="form" method="post" action="?page=diskuze">
     <div class="form-group">
@@ -103,3 +129,4 @@
         </div>
     </div>
 </form>
+</div>

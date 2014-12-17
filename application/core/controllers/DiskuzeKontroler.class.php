@@ -28,7 +28,7 @@ class DiskuzeKontroler extends Kontroler{
             $text = $_POST['text'];
             if (!Session::isPrihlasen()) {
                 $jmeno = $_POST['jmeno'];
-                $email = $_POST['email'];
+                $email = strtolower($_POST['email']);
                 $recaptcha = $_POST['g-recaptcha-response'];
                 if (!empty($recaptcha)) {
                     $userIP = $_SERVER["REMOTE_ADDR"];
@@ -63,6 +63,14 @@ class DiskuzeKontroler extends Kontroler{
             $this->info = $vysledek;
         }
         
+        if (isset($_POST['text_upravy']) && Session::isPrihlasen()) {
+            $text = $_POST['text_upravy'];
+            $id_dotazu = $_POST['id_diskuze'];
+            $email = Session::getEmail();
+            $vysledek = $diskuze->upravDotaz($id_dotazu, $text, $email);
+            $this->info = $vysledek;
+        }
+        
         if (Session::isPrihlasen()) {
             $this->prihlaseni = getUzivatelskeMenu(Session::getEmail());
             if (Session::getTypUctu() == 'admin') {
@@ -76,8 +84,12 @@ class DiskuzeKontroler extends Kontroler{
                     $this->info = $vysledek;
                 }
             }
+            if (isset($_REQUEST["editDotaz"])) {
+                $template_params['id_upravy'] = $_REQUEST["editDotaz"];
+            }
             $template_params['jmeno'] = "<span style='color: black;' class='form-control'>".Session::getJmenoDis()."</span>";
             $template_params['email'] = "<span style='color: black;' class='form-control'>".Session::getEmail()."</span>";
+            $template_params['email_edit'] = Session::getEmail();
         }
         else {
             $this->prihlaseni = getTlacitko();

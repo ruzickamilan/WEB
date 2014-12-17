@@ -50,7 +50,7 @@ $(document).ready(function () {
             predmet: {
                 required: "Zadej předmět!",
                 minlength: "Předmět musí mít alespoň 3 znaky!",
-                maxlength: "Předmět může mít maximálně 20 znaků!"
+                maxlength: "Předmět může mít maximálně 30 znaků!"
             }
         },
         rules: {
@@ -103,7 +103,7 @@ $(document).ready(function () {
             predmet: {
                 required: true,
                 minlength: 3,
-                maxlength: 20
+                maxlength: 30
             }
         }
     });
@@ -114,10 +114,20 @@ $(document).ready(function () {
                 required: "Zadej nějaký text!",
                 minlength: "Text musí mít alespoň 10 znaků!",
                 maxlength: "Text může mít maximálně 500 znaků!"
+            },
+            text_upravy: {
+                required: "Zadej nějaký text!",
+                minlength: "Text musí mít alespoň 10 znaků!",
+                maxlength: "Text může mít maximálně 500 znaků!"
             }
         },
         rules: {
             text_reakce: {
+                required: true,
+                minlength: 10,
+                maxlength: 500
+            },
+            text_upravy: {
                 required: true,
                 minlength: 10,
                 maxlength: 500

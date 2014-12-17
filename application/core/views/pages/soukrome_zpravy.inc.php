@@ -5,9 +5,7 @@
         <table class="diskuze table-bordered">
             <thead>
                 <tr>
-                    <td style="text-align: center;" rowspan="3"><button type="submit" class="btn btn-primary" name="smazat">Smazat</button></td>
-                </tr>
-                <tr>
+                    <td style="text-align: center;" rowspan="2"><button type="submit" class="btn btn-primary" name="smazat">Smazat</button></td>
                     <td>Odesílatel</td>
                     <td>Předmět</td>
                     <td>Čas</td>
@@ -20,11 +18,8 @@
             <tbody>
                 {% set zadna_zprava = 'true' %}
                 {% for zprava in zpravy %}
-                <tr style="border-top: 2px solid grey;"></tr>
-                <tr>
-                    <td rowspan="3" style="text-align: center;"><input type = 'checkbox' name = 'smaz[]' value = '{{ zprava['id'] }}'></td>
-                </tr>
-                <tr>
+                <tr style="border-top: 2px solid gray;">
+                    <td rowspan="2" style="text-align: center;"><input type = 'checkbox' name = 'smaz[]' value = '{{ zprava['id'] }}'></td>
                     <td><b>{{ zprava['jmeno'] }} ({{ zprava['email'] }})</b></td>
                     <td>{{ zprava['predmet'] }}</td>
                     <td><b><span class="features simptip-position-left simptip-fade" data-tooltip="{{ zprava['cely_cas'] }}">{{ zprava['cas'] }}</span></b></td>
@@ -41,4 +36,5 @@
             </tbody>
         </table>
     </form>
+    <br /><a href="?page=muj_ucet">Zpět na můj účet</a>
 </div>       
