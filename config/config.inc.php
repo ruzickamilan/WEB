@@ -19,7 +19,7 @@ define('WEB_DOMAIN', 'http://quatrofin.cz/');
 define('PODSLOZKA', '');
  */
 define('WEB_DOMAIN', 'http://localhost/WEB/');
-define('PODSLOZKA', 'WEB/');
+define('PODSLOZKA', 'quatrofin/');
 
 /*
   define('DB_TYPE', 'mysql');
