@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 16. pro 2014, 21:18
+-- Vytvořeno: Čtv 08. led 2015, 17:03
 -- Verze serveru: 5.6.17
 -- Verze PHP: 5.5.12
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Databáze: `db1`
+-- Databáze: `quatrofin`
 --
 
 -- --------------------------------------------------------
@@ -51,21 +51,22 @@ INSERT INTO `diskuze` (`id`, `jmeno`, `email`, `cas`, `text`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `odpoved` (
+`id` int(255) NOT NULL,
   `cas` datetime NOT NULL,
   `text` varchar(500) COLLATE utf8_czech_ci NOT NULL,
   `diskuze_id` int(255) NOT NULL,
   `uzivatel_id` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 --
 -- Vypisuji data pro tabulku `odpoved`
 --
 
-INSERT INTO `odpoved` (`cas`, `text`, `diskuze_id`, `uzivatel_id`) VALUES
-('2014-12-10 21:58:51', 'Dobrý den, musíte mít autorizovaný učet. Při registraci Vám přišel email s autorizačním odkazem, jestliže se Vám někde zatoulal, můžete si z nabídky "Můj účet" zaslat nový autorizační odkaz!', 2, 2),
-('2014-12-10 22:11:20', 'Jsem to k Vašim službám... pište mi do soukromých zpráv, děkuji! :-)', 3, 1),
-('2014-12-10 22:12:51', 'Paráda! :-)', 1, 3),
-('2014-12-15 14:16:46', ':-) :-) :-)', 1, 1);
+INSERT INTO `odpoved` (`id`, `cas`, `text`, `diskuze_id`, `uzivatel_id`) VALUES
+(1, '2014-12-10 21:58:51', 'Dobrý den, musíte mít autorizovaný učet. Při registraci Vám přišel email s autorizačním odkazem, jestliže se Vám někde zatoulal, můžete si z nabídky "Můj účet" zaslat nový autorizační odkaz!', 2, 2),
+(2, '2014-12-10 22:11:20', 'Jsem to k Vašim službám... pište mi do soukromých zpráv, děkuji! :-)', 3, 1),
+(3, '2014-12-10 22:12:51', 'Paráda! :-)', 1, 3),
+(4, '2014-12-15 14:16:46', ':-) :-) :-)', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ ALTER TABLE `diskuze`
 -- Klíče pro tabulku `odpoved`
 --
 ALTER TABLE `odpoved`
- ADD KEY `diskuze_id` (`diskuze_id`), ADD KEY `uzivatel_id` (`uzivatel_id`);
+ ADD PRIMARY KEY (`id`), ADD KEY `diskuze_id` (`diskuze_id`), ADD KEY `uzivatel_id` (`uzivatel_id`);
 
 --
 -- Klíče pro tabulku `prijemce`
@@ -195,6 +196,11 @@ ALTER TABLE `zprava`
 -- AUTO_INCREMENT pro tabulku `diskuze`
 --
 ALTER TABLE `diskuze`
+MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pro tabulku `odpoved`
+--
+ALTER TABLE `odpoved`
 MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pro tabulku `uzivatel`

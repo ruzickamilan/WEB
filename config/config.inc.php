@@ -30,7 +30,7 @@ define('PODSLOZKA', 'quatrofin/');
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_DATABASE_NAME', 'db1');
+define('DB_DATABASE_NAME', 'quatrofin');
 define('DB_USER_LOGIN', 'root');
 define('DB_USER_PASSWORD', 'root');
 

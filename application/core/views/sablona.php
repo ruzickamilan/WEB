@@ -22,6 +22,13 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <link href="css/ie.css" rel="stylesheet">
         <![endif]-->
+        
+        <script>
+            function getYear() {
+                datum = new Date();
+                document.write(datum.getFullYear());
+            }
+        </script>
     </head>
     <body>
         <!-- Navigation -->
@@ -176,7 +183,7 @@
             <footer>
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; 2014, <a href="http://www.milanruzicka.wz.cz/">Milan Růžička</a></p>
+                        <p>Copyright &copy; <script>getYear();</script>, <a href="http://www.milanruzicka.wz.cz/">Milan Růžička</a></p>
                     </div>
                 </div>
             </footer>
